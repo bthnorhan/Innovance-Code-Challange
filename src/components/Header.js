@@ -1,26 +1,29 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import {
+	Link
+  } from "react-router-dom";
 
 const Header = () => {
 	const isLoggedIn = useSelector(state => state.state.isLoggedIn)
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
-			<a className="navbar-brand mb-0 h1 text-white font-weight-bold" href="/"><span role="img" aria-label="rocket">🚀</span> Launchrary</a>
+			<Link className="navbar-brand mb-0 h1 text-white font-weight-bold" to="/"><span role="img" aria-label="rocket">🚀</span> Launchrary</Link>
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
 			</button>
 			<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div className="navbar-nav w-100">
-					<a className="nav-item nav-link text-white" href="/">Upcoming Launches</a>
-					<a className="nav-item nav-link text-white" href="/about">About</a>
+					<Link className="nav-item nav-link text-white" to="/upcoming">Upcoming Launches</Link>
+					<Link className="nav-item nav-link text-white" to="/about">About</Link>
 					{
 						isLoggedIn ?
 						<>
-							<a className="nav-item nav-link text-white  ml-auto" href="/profile">Profile</a>
-							<a className="nav-item nav-link text-white" href="/logout">Log Out</a>
+							<Link className="nav-item nav-link text-white  ml-auto" to="/profile">Profile</Link>
+							<Link className="nav-item nav-link text-white" to="/logout">Log Out</Link>
 						</> :
-						<a className="nav-item nav-link text-white ml-auto" href="/login">Login</a>
+						<Link className="nav-item nav-link text-white ml-auto" to="/login">Login</Link>
 					}
 				</div>
 			</div>

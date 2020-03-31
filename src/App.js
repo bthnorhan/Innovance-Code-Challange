@@ -11,7 +11,7 @@ import LogoutPage from './pages/LogoutPage';
 
 function App() {
 	return (
-		<Router>
+		<Router basename='/Innovance-Code-Challange'>
 			<Switch>
 				<Route exact path="/" component={LoadingPage} />
 				<Route exact path="/login" component={LoginPage} />
