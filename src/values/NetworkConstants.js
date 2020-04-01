@@ -24,7 +24,8 @@ const NetworkConstants = {
 	TYPE_NAME: 'typeName',
 	UID: 'uid',
 	LOCATION: 'location',
-	PADS: 'pads'
+	PADS: 'pads',
+	WIKI_URL: 'wikiURL'
 }
 
 export default NetworkConstants;

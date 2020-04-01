@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -14,7 +14,7 @@ import LaunchDetailPage from './pages/LaunchDetailPage';
 
 function App() {
 	return (
-		<Router basename='/Innovance-Code-Challange'>
+		<Router>
 			<Switch>
 				<Route exact path="/" component={LoadingPage} />
 				<Route exact path="/login" component={LoginPage} />

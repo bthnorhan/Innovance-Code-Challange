@@ -5,7 +5,8 @@ import {
 	SET_LOGGED_IN,
 	SET_USER,
 	ADD_STAR,
-	REMOVE_STAR
+	REMOVE_STAR,
+	ADD_LAUNCHES
 } from './Types';
 
 const INITIAL_STATE = {
@@ -13,7 +14,8 @@ const INITIAL_STATE = {
 	isLoggedIn: false,
 	user: '',
 	starIds: [],
-	stars: []
+	stars: [],
+	launches: []
 };
 
 const Reducer = (state = INITIAL_STATE, action) => {
@@ -51,6 +53,10 @@ const Reducer = (state = INITIAL_STATE, action) => {
 			var starIds = state.starIds.filter(item => item !== removeLaunch.id);
 			return { ...state, stars, starIds };
 
+		case ADD_LAUNCHES:
+			var payloadLaunches = action.payload;
+			var launches = [...state.launches, ...payloadLaunches]
+			return { ...state, launches };
 		default:
 			return state;
 	}

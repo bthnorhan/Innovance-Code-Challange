@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import NetworkConstants from '../values/NetworkConstants';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addLaunches } from '../redux/Action';
 
 import { Link } from 'react-router-dom';
 
@@ -13,10 +15,10 @@ class UpcomingLaunchesPage extends Component {
 		super(props)
 
 		this.state = {
-			launches: [],
-			offset: 0,
 			isLoading: false
 		}
+
+		this.lastLaunch = React.createRef();
 	}
 
 	componentDidMount() {
@@ -25,8 +27,12 @@ class UpcomingLaunchesPage extends Component {
 		this.getLaunches();
 	}
 
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+
 	handleScroll = (event) => {
-		if ((window.scrollY / event.target.body.scrollHeight) > 0.90 && !this.state.isLoading) {
+		if ((window.scrollY / event.target.body.scrollHeight) > ((this.lastLaunch.current.offsetTop - (this.lastLaunch.current.offsetHeight * 2)) / event.target.body.scrollHeight) && !this.state.isLoading) {
 			console.log("Fetching launches.");
 			this.getLaunches();
 		}
@@ -38,7 +44,7 @@ class UpcomingLaunchesPage extends Component {
 				isLoading: true
 			})
 
-			let encodedValue = "?" + NetworkConstants.NEXT10 + "&" + NetworkConstants.OFFSET + "=" + this.state.offset + NetworkConstants.LAUNCH_FILTER;
+			let encodedValue = "?" + NetworkConstants.NEXT10 + "&" + NetworkConstants.OFFSET + "=" + this.props.state.launches.length + NetworkConstants.LAUNCH_FILTER;
 			fetch(NetworkConstants.BASE_URL + NetworkConstants.LAUNCH + encodedValue, {
 				method: 'GET'
 			})
@@ -46,9 +52,9 @@ class UpcomingLaunchesPage extends Component {
 				.then((responseJson) => {
 					console.log(responseJson);
 
+					this.props.addLaunches(responseJson.launches);
+
 					this.setState({
-						launches: [...this.state.launches, ...responseJson.launches],
-						offset: this.state.offset + responseJson.count,
 						isLoading: false
 					})
 				})
@@ -63,7 +69,7 @@ class UpcomingLaunchesPage extends Component {
 
 	renderLaunch(launch, index) {
 		return (
-			<Link to={`/launch/${launch.id}`} key={index}>
+			<Link to={`/launch/${launch.id}`} key={index} ref={this.lastLaunch}>
 				<div className="card mb-4">
 					<div className="card-header d-flex flex-row align-items-center">
 						<h4 className="mb-0">{launch[NetworkConstants.WINDOW_START]}</h4>
@@ -85,7 +91,7 @@ class UpcomingLaunchesPage extends Component {
 				<div className="container h-100">
 					<h2 className="text-white mt-4">Upcoming Launches</h2>
 					{
-						this.state.launches.map((launch, index) => this.renderLaunch(launch, index))
+						this.props.state.launches.map((launch, index) => this.renderLaunch(launch, index))
 					}
 				</div>
 			</div>
@@ -97,4 +103,10 @@ const mapStateToProps = (state) => {
 	return state;
 };
 
-export default connect(mapStateToProps)(UpcomingLaunchesPage);
+const mapDispatchToProps = dispatch => (
+	bindActionCreators({
+		addLaunches
+	}, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingLaunchesPage);

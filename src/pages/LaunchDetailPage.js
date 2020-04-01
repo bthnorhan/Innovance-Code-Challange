@@ -77,6 +77,7 @@ class LaunchDetailPage extends Component {
 								<div className="card-body">
 									<h5 className="card-title">{this.state.launch[NetworkConstants.ROCKET][NetworkConstants.NAME]}</h5>
 									<p className="card-text">{this.state.launch[NetworkConstants.LOCATION][NetworkConstants.PADS][0][NetworkConstants.NAME]}</p>
+									<p className="card-text">For more information : <a href={this.state.launch[NetworkConstants.ROCKET][NetworkConstants.WIKI_URL]} rel="noopener noreferrer" target="_blank">{this.state.launch[NetworkConstants.ROCKET][NetworkConstants.WIKI_URL]}</a></p>
 								</div>
 							</div> :
 							<div className="d-flex justify-content-center">

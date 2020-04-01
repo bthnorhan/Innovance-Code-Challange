@@ -4,7 +4,8 @@ import {
 	SET_LOGGED_IN,
 	SET_USER,
 	ADD_STAR,
-	REMOVE_STAR
+	REMOVE_STAR,
+	ADD_LAUNCHES
 } from "./Types";
 
 export const setStateValue = (stateValue) => (
@@ -45,5 +46,12 @@ export const removeStar = (launch) => (
 	{
 		type: REMOVE_STAR,
 		payload: launch,
+	}
+);
+
+export const addLaunches = (launches) => (
+	{
+		type: ADD_LAUNCHES,
+		payload: launches
 	}
 );
