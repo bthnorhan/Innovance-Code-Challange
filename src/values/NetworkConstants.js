@@ -1,6 +1,6 @@
 const NetworkConstants = {
 	BASE_URL : 'https://launchlibrary.net/1.4/',
-	NEXT10: 'next/10',
+	NEXT10: 'next=10',
 	LAUNCH: 'launch',
 	START_DATE: 'startdate',
 	END_DATE: 'enddate',

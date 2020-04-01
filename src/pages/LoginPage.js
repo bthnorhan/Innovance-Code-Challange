@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Helper from '../Helper';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setLoggedIn } from '../redux/Action'
+import { setLoggedIn, setUser } from '../redux/Action';
+
 class LoginPage extends Component {
 
 	constructor(props) {
@@ -24,7 +25,8 @@ class LoginPage extends Component {
 
 		if (this.state.errors.email.length === 0 && this.state.errors.password.length === 0) {
 			this.props.setLoggedIn(true);
-			this.props.history.push("/")
+			this.props.setUser(this.state.email);
+			this.props.history.push("/");
 		}
 	}
 
@@ -81,6 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
 	bindActionCreators({
 		setLoggedIn,
+		setUser
 	}, dispatch)
 );
 

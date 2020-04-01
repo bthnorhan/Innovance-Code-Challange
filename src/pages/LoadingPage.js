@@ -5,7 +5,7 @@ export default class LoadingPage extends Component {
 	componentDidMount() {
 		setTimeout(() => {
 			this.props.history.push("/upcoming")
-		}, 1500);
+		}, 1000);
 	}
 
 	render() {

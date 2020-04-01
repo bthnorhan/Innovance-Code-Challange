@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import '../assets/styles/Loading.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setLoggedIn } from '../redux/Action'
+import { clearState } from '../redux/Action'
 
 class LogoutPage extends Component {
 	componentDidMount() {
 		setTimeout(() => {
-			this.props.setLoggedIn(false);
+			this.props.clearState();
 			this.props.history.push("/upcoming")
 		}, 1500);
 	}
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => (
 	bindActionCreators({
-		setLoggedIn,
+		clearState
 	}, dispatch)
 );
 

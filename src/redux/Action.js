@@ -1,7 +1,10 @@
 import {
 	SET_STATE_VALUE,
 	CLEAR_STATE,
-	SET_LOGGED_IN
+	SET_LOGGED_IN,
+	SET_USER,
+	ADD_STAR,
+	REMOVE_STAR
 } from "./Types";
 
 export const setStateValue = (stateValue) => (
@@ -21,5 +24,26 @@ export const setLoggedIn = (isLoggedIn) => (
 	{
 		type: SET_LOGGED_IN,
 		payload: isLoggedIn,
+	}
+);
+
+export const setUser = (user) => (
+	{
+		type: SET_USER,
+		payload: user,
+	}
+);
+
+export const addStar = (launch) => (
+	{
+		type: ADD_STAR,
+		payload: launch,
+	}
+);
+
+export const removeStar = (launch) => (
+	{
+		type: REMOVE_STAR,
+		payload: launch,
 	}
 );

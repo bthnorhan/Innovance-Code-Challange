@@ -1,0 +1,9 @@
+.navbar-light {
+	background-color: #845ec2 !important;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+	color: #212529;
+}
